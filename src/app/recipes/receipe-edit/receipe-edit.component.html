@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form [formGroup]="receipeForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" formControlName="name"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imagePath">Image URL</label>
+                        <input type="text" id="imagePath" class="form-control" formControlName="imagePath" #imagePath/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imagePath">Image Preview</label>
+                        <img [src]="imagePath.value" class="img-responsive" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="imagePath">Description</label>
+                        <textarea type="text" id="imagePath" class="form-control" rows="6" formControlName="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12" formArrayName="ingredient">
+                    <div class="row"
+                    *ngFor="let ingredientCtrl of receipeForm.get('ingredient').value; let i = index;"
+                    [formGroupName]="i" style="margin-top: 10px;">
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" formControlName="name" id="receipeName"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="number" class="form-control" formControlName="amount" id="receipeAmount"/>
+                        </div>
+                        <div class="col-xs-2">
+                            <button class="btn btn-danger" type="button" (click)="deleteReceipe(i)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <div class="row">
+            <div class="col-xs-12">
+                <button class="btn btn-success" (click)="addIngredients()">Add ingredient</button>
+            </div>
+        </div>
+    </div>
+</div>
